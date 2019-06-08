@@ -30,19 +30,33 @@ public class Controller {
 
     @FXML // fx:id="cryptChoice";
     private ChoiceBox cryptChoice;
+    ObservableList<String> cryptChoiceList = FXCollections.observableArrayList("AES-128","AES-192","AES-256",
+            "DES-56","DESede-112","DESede-168");
+
+    private Crypt crypt = new Crypt();
 
     @FXML
     private void initialize(){
         this.hashChoice.setValue("SHA-256");
         this.hashChoice.setItems(this.hashChoiceList);
+        this.cryptChoice.setValue("AES-256");
+        this.cryptChoice.setItems(this.cryptChoiceList);
     }
 
     public void pressHashBtn(ActionEvent event){
-        System.out.println("Press Hash button");
+        String choice = String.valueOf(this.hashChoice.getValue());
+        String msg = msgField.getText();
+        String hash =this.crypt.calculateHash(msg,choice);
+        this.hashField.setText(hash);
     }
 
     public void pressGenerateKey(ActionEvent event){
-        System.out.println("Press generate key");
+        String choice = (String) this.cryptChoice.getValue();
+        String[] choiceList = choice.split("-");
+        String algo = choiceList[0];
+        String keySize = choiceList[1];
+        String key = this.crypt.generateSymetricKey(algo,keySize);
+        this.keyArea.setText(key);
     }
 
     public void pressEncrypt(ActionEvent event){
