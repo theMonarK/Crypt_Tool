@@ -1,4 +1,4 @@
-package sample;
+package com.anthony.crypttool;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +10,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("crypttool.fxml"));
         primaryStage.setTitle("Crypt Tool");
-        primaryStage.setScene(new Scene(root, 500, 475));
+        primaryStage.setScene(new Scene(root, 550, 475));
         primaryStage.show();
     }
 
